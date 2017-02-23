@@ -30,6 +30,14 @@ namespace quali
                 {
                     videos[i] = new Video(i, Convert.ToInt32(numbersFromLine[i]));
                 }
+                for (int i = 0; i < endpoints.Length; i++)
+                {
+                    endpoints[i] = ReadEndpointFromFile(ref sr);
+                }
+                for (int i = 0; i < requests.Length; i++)
+                {
+                    requests[i] = ReadRequestFromFile(ref sr);
+                }
             }
 
             #endregion
@@ -42,16 +50,26 @@ namespace quali
             //zrob tablice cachy i wpisz ich rozmiary
             // uzupelnij dane w tablicy filmow
             // uzupelnij dane endpointow ( opoznienie do datacenter i zrob liste podlaczonych cache )
+            // 
 
-
-            //globalna lista filmow listaFilmow[i] rozmiar video i
+            //globalna lista filmow listaFilmow[i] rozmiar video 
         }
         static Endpoint ReadEndpointFromFile(ref StreamReader sr)
         {
-            int dataCenterLantency;
-            int numberOfEndpoints;
-
-            return null;
+            int[] arr = ConvertLineToIntArray(ref sr);//arr[0]==latency to main server arr[1]==numbers of cache servers connected
+            Endpoint end = new Endpoint(arr[0], arr[1]);
+            for (int i  = 0; i  <end.cachesAndLatency.Length; i ++)
+            {
+                arr = ConvertLineToIntArray(ref sr);//arr[0]=id cache arr[1]=latencyFromEndpointToCache
+                end.cachesAndLatency[i] = new Tuple<int, int>(arr[0], arr[1]);
+            }
+            return end;
+        }
+        static Request ReadRequestFromFile(ref StreamReader sr)
+        {
+            int[] arr = ConvertLineToIntArray(ref sr);//arr[0] = vidID arr[1]=endpoint id arr[2]=number of request
+            Request req = new Request(arr[0], arr[1], arr[2]);
+            return req;
         }
         static int [] ConvertLineToIntArray(ref StreamReader sr)
         {
