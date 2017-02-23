@@ -9,7 +9,9 @@ namespace quali
     class CacheServer
     {
         // statyczna stala z rozmiarem serwera - jedna dla wszystkich serwerow
+        static readonly int ServerCapacity;
         // lista id filmow
+        
         // dostepne miejsce
     }
 }
