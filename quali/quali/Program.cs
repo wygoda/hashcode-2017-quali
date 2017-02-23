@@ -11,6 +11,7 @@ namespace quali
     {
         static void Main(string[] args)
         {
+            string line;
             StreamReader sr = new StreamReader(args[0]);
             Video[] videos;
             Endpoint[] endpoints;
@@ -19,27 +20,15 @@ namespace quali
             //brzydkie gowno over here
             #region Initialization
             {
-                string[] numbersFromLine = sr.ReadLine().Split(' ');
-                int[] numbers = new int[numbersFromLine.Length];
-                for (int i = 0; i < numbers.Length; i++)
-                {
-                    numbers[i] = Convert.ToInt32(numbersFromLine[i]);
-                }
+                int[] numbers = ConvertLineToIntArray(ref sr);
                 videos = new Video[numbers[0]];
                 endpoints = new Endpoint[numbers[1]];
                 requests = new Request[numbers[2]];
                 cachedServers = new CacheServer[numbers[3]];
-                numbersFromLine = sr.ReadLine().Split(' ');
+                string []numbersFromLine = sr.ReadLine().Split(' ');
                 for (int i = 0; i < videos.Length; i++)
                 {
                     videos[i] = new Video(i, Convert.ToInt32(numbersFromLine[i]));
-                }
-
-                //readEndpoint
-
-                for (int i = 0; i < requests.Length; i++)
-                {
-                    
                 }
             }
 
@@ -56,6 +45,23 @@ namespace quali
 
 
             //globalna lista filmow listaFilmow[i] rozmiar video i
+        }
+        static Endpoint ReadEndpointFromFile(ref StreamReader sr)
+        {
+            int dataCenterLantency;
+            int numberOfEndpoints;
+
+            return null;
+        }
+        static int [] ConvertLineToIntArray(ref StreamReader sr)
+        {
+            string[] numbersFromLine = sr.ReadLine().Split(' ');
+            int[] numbers = new int[numbersFromLine.Length];
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                numbers[i] = Convert.ToInt32(numbersFromLine[i]);
+            }
+            return numbers;
         }
     }
 }
