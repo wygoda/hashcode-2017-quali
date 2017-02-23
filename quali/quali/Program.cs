@@ -47,6 +47,23 @@ namespace quali
             }
 
             #endregion
+
+
+
+            for (int i = 0; i < 3; i++)
+            {
+                cachedServers[endpoints[requests[i].EndpointId].cachesAndLatency[0].Item1].AddMovie(videos[requests[i].VidId]);
+            }
+
+            //zrob tablice filmow
+            //zrob talice endpointow
+            //zrob tablice requestow
+            //zrob tablice cachy i wpisz ich rozmiary
+            // uzupelnij dane w tablicy filmow
+            // uzupelnij dane endpointow ( opoznienie do datacenter i zrob liste podlaczonych cache )
+            // 
+
+            //globalna lista filmow listaFilmow[i] rozmiar video 
             StreamWriter sw = new StreamWriter(string.Format(args[0] + "_output"));
             sw.WriteLine(cachedServers.Length);
             for (int i = 0; i < cachedServers.Length; i++)
