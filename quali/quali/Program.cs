@@ -30,9 +30,16 @@ namespace quali
                 requests = new Request[numbers[2]];
                 cachedServers = new CacheServer[numbers[3]];
                 numbersFromLine = sr.ReadLine().Split(' ');
-                for (int i = 0; i < numbers.Length; i++)
+                for (int i = 0; i < videos.Length; i++)
                 {
                     videos[i] = new Video(i, Convert.ToInt32(numbersFromLine[i]));
+                }
+
+                //readEndpoint
+
+                for (int i = 0; i < requests.Length; i++)
+                {
+                    
                 }
             }
 
