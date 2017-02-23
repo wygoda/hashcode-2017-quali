@@ -19,7 +19,7 @@ namespace quali
             ServerCapacity = cap;
             freeSpace = ServerCapacity;
         }
-        void AddMovie(Video vid)
+        public void AddMovie(Video vid)
         {
             videosCachedOnServer.Add(vid.Id);
             freeSpace -= vid.Size;
