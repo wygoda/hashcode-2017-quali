@@ -8,7 +8,8 @@ namespace quali
 {
     class CacheServer
     {
-        // tu bedzie lista filmow z ich rozmiarami 
         // statyczna stala z rozmiarem serwera - jedna dla wszystkich serwerow
+        // lista id filmow
+        // dostepne miejsce
     }
 }

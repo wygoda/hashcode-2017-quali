@@ -8,9 +8,9 @@ namespace quali
 {
     class Endpoint
     {
-        int LatencyDataCenter;
-        
-       //opoznienie do datacenter
-       //tablica krotek podpietych cache i opoznien do nich
+        //opoznienie do datacenter
+        int LatencyToDataCenter;
+        //tablica krotet z id podpietych cache i opoznien do nich
+        Tuple<int, int>[] CacheLatencyTuple;
     }
 }

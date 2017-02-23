@@ -11,7 +11,7 @@ namespace quali
         //zrob tablice filmow
         //zrob talice endpointow
         //zrob tablice requestow
-        //zrob tablice cachy
+        //zrob tablice cachy i wpisz ich rozmiary
         // uzupelnij dane w tablicy filmow
         // uzupelnij dane endpointow ( opoznienie do datacenter i zrob liste podlaczonych cache )
 
