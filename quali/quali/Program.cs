@@ -51,8 +51,13 @@ namespace quali
             sw.WriteLine(cachedServers.Length);
             for (int i = 0; i < cachedServers.Length; i++)
             {
-                for (int j = 0; j < cachedServers[i].videosCachedOnServer.Capacity; j++)
+                for (int j = 0; j <= cachedServers[i].videosCachedOnServer.Count; j++)
                 {
+                    if (cachedServers[i].videosCachedOnServer.Count==0)
+                    {
+                        sw.WriteLine(i + " 0");
+                        break;
+                    }
                     sw.Write(cachedServers[i].videosCachedOnServer[j]);
                 }
                 sw.Write("\n");
