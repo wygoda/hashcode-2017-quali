@@ -44,6 +44,11 @@ namespace quali
 
 
 
+            for (int i = 0; i < 3; i++)
+            {
+                cachedServers[endpoints[requests[i].EndpointId].cachesAndLatency[0].Item1].AddMovie(videos[requests[i].VidId]);
+            }
+
             //zrob tablice filmow
             //zrob talice endpointow
             //zrob tablice requestow
