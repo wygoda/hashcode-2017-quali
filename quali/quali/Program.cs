@@ -15,9 +15,26 @@ namespace quali
             Video[] videos;
             Endpoint[] endpoints;
             Request[] requests;
-            CacheServer[] cachedServers;
+            CacheServer[] cachedServers;            
+            //brzydkie gowno over here
             #region Initialization
-            
+            {
+                string[] numbersFromLine = sr.ReadLine().Split(' ');
+                int[] numbers = new int[numbersFromLine.Length];
+                for (int i = 0; i < numbers.Length; i++)
+                {
+                    numbers[i] = Convert.ToInt32(numbersFromLine[i]);
+                }
+                videos = new Video[numbers[0]];
+                endpoints = new Endpoint[numbers[1]];
+                requests = new Request[numbers[2]];
+                cachedServers = new CacheServer[numbers[3]];
+                numbersFromLine = sr.ReadLine().Split(' ');
+                for (int i = 0; i < numbers.Length; i++)
+                {
+                    videos[i] = new Video(i, Convert.ToInt32(numbersFromLine[i]));
+                }
+            }
 
             #endregion
 
