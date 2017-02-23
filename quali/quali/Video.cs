@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace quali
 {
-    class Program
+    class Video
     {
-        static void Main(string[] args)
-        {
-            //globalna lista filmow listaFilmow[i] rozmiar video i
-        }
+        //id filmu i jego rozmiar
     }
 }
