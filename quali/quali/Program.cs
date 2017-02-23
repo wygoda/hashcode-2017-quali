@@ -47,6 +47,16 @@ namespace quali
             }
 
             #endregion
+            StreamWriter sw = new StreamWriter(string.Format(args[0] + "_output"));
+            sw.WriteLine(cachedServers.Length);
+            for (int i = 0; i < cachedServers.Length; i++)
+            {
+                for (int j = 0; j < cachedServers[i].videosCachedOnServer.Capacity; j++)
+                {
+                    sw.Write(cachedServers[i].videosCachedOnServer[j]);
+                }
+                sw.Write("\n");
+            }
         }
         static Endpoint ReadEndpointFromFile(ref StreamReader sr)
         {

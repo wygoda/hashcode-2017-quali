@@ -12,7 +12,6 @@ namespace quali
         public int VidId { get; }
         public int EndpointId { get; }
         public int ReqCount { get; }
-
         public Request(int vidId, int endpointId, int reqCount)
         {
             VidId = vidId;

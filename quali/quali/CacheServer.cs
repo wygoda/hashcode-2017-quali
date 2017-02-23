@@ -11,7 +11,7 @@ namespace quali
         // statyczna stala z rozmiarem serwera - jedna dla wszystkich serwerow
         static int ServerCapacity;
         // lista id filmow
-        List<int> videosCachedOnServer = new List<int>();
+        public List<int> videosCachedOnServer = new List<int>();
         // dostepne miejsce
         int freeSpace;
         public CacheServer(int cap)
