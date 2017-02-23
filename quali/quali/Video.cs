@@ -9,5 +9,13 @@ namespace quali
     class Video
     {
         //id filmu i jego rozmiar
+        public int Id { get; }
+        public int Size { get; }
+
+        public Video(int id, int size)
+        {
+            Id = id;
+            Size = size;
+        }
     }
 }
