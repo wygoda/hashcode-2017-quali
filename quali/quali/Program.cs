@@ -11,12 +11,13 @@ namespace quali
     {
         static void Main(string[] args)
         {
-            string line;
+            
             StreamReader sr = new StreamReader(args[0]);
             Video[] videos;
             Endpoint[] endpoints;
             Request[] requests;
-            CacheServer[] cachedServers;            
+            CacheServer[] cachedServers;       
+                 
             //brzydkie gowno over here
             #region Initialization
             {
@@ -25,6 +26,11 @@ namespace quali
                 endpoints = new Endpoint[numbers[1]];
                 requests = new Request[numbers[2]];
                 cachedServers = new CacheServer[numbers[3]];
+                for (int i = 0; i < cachedServers.Length; i++)
+                {
+                    cachedServers[i] = new CacheServer(numbers[4]);
+                }
+                //cachedServers[0] = new CacheServer(10);
                 string []numbersFromLine = sr.ReadLine().Split(' ');
                 for (int i = 0; i < videos.Length; i++)
                 {
@@ -58,6 +64,16 @@ namespace quali
             // 
 
             //globalna lista filmow listaFilmow[i] rozmiar video 
+            StreamWriter sw = new StreamWriter(string.Format(args[0] + "_output"));
+            sw.WriteLine(cachedServers.Length);
+            for (int i = 0; i < cachedServers.Length; i++)
+            {
+                for (int j = 0; j < cachedServers[i].videosCachedOnServer.Capacity; j++)
+                {
+                    sw.Write(cachedServers[i].videosCachedOnServer[j]);
+                }
+                sw.Write("\n");
+            }
         }
         static Endpoint ReadEndpointFromFile(ref StreamReader sr)
         {
