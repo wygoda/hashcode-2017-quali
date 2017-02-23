@@ -9,11 +9,16 @@ namespace quali
     class CacheServer
     {
         // statyczna stala z rozmiarem serwera - jedna dla wszystkich serwerow
-        static readonly int ServerCapacity;
+        static int ServerCapacity;
         // lista id filmow
         List<int> videosCachedOnServer = new List<int>();
         // dostepne miejsce
         int freeSpace;
+        public CacheServer(int cap)
+        {
+            ServerCapacity = cap;
+            freeSpace = ServerCapacity;
+        }
         void AddMovie(Video vid)
         {
             videosCachedOnServer.Add(vid.Id);
