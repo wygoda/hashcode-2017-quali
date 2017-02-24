@@ -103,12 +103,19 @@ namespace quali
             }
             sw.Close();
         }
-
         static void ProcessAndChooseRequests(ref Video[] videos, ref Endpoint[] endpoints, ref Request[] requests,ref CacheServer[] cachedServers)
         {
             for (int i = 0; i < requests.Length; i++)
             {
                 cachedServers[endpoints[requests[i].EndpointId].cachesAndLatency[0].Item1].AddMovie(videos[requests[i].VidId]);
+            }
+        }
+
+        static void CalculateSavedTime(ref Video[] videos, ref Endpoint[] endpoints, ref Request[] requests, ref CacheServer[] cachedServers)
+        {
+            for (int i = 0; i < requests.Length; i++)
+            {
+
             }
         }
     }
