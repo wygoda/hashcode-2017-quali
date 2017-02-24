@@ -21,6 +21,12 @@ namespace quali
         }
         public void AddMovie(Video vid)
         {
+            //WE HAVE TO CHECK IF THERE IS ENOUGH OF STORAGE SPACE TO ADD THE VIDEO FIRST
+            if (freeSpace<vid.Size||videosCachedOnServer.Contains(vid.Id))
+            {
+                Console.WriteLine("We dont have enough space or this movie is already on the list");
+                return;
+            }
             videosCachedOnServer.Add(vid.Id);
             freeSpace -= vid.Size;
         }

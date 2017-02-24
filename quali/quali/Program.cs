@@ -45,44 +45,11 @@ namespace quali
                     requests[i] = ReadRequestFromFile(ref sr);
                 }
             }
-
             #endregion
-
-
-
-            for (int i = 0; i < 3; i++)
-            {
-            cachedServers[endpoints[requests[i].EndpointId].cachesAndLatency[0].Item1].AddMovie(videos[requests[i].VidId]);
-            }
-           
-
-            //zrob tablice filmow
-            //zrob talice endpointow
-            //zrob tablice requestow
-            //zrob tablice cachy i wpisz ich rozmiary
-            // uzupelnij dane w tablicy filmow
-            // uzupelnij dane endpointow ( opoznienie do datacenter i zrob liste podlaczonych cache )
-            // 
-
-            //globalna lista filmow listaFilmow[i] rozmiar video 
-
-
-            //to jest to wyjebania
-            StreamWriter sw = new StreamWriter(string.Format(args[0] + "_output.txt"));
-            sw.WriteLine(cachedServers.Length);
-            for (int i = 0; i < cachedServers.Length; i++)
-            {
-                for (int j = 0; j <= cachedServers[i].videosCachedOnServer.Count; j++)
-                {
-                    if (cachedServers[i].videosCachedOnServer.Count==0)
-                    {
-                        sw.WriteLine(i + " 0");
-                        break;
-                    }
-                    sw.Write(cachedServers[i].videosCachedOnServer[j]);
-                }
-                sw.Write("\n");
-            }
+            ProcessAndChooseRequests(ref videos,ref endpoints,ref requests,ref cachedServers);
+            SaveInputToFile(cachedServers, args[0] + "_output.txt");
+            Console.ReadKey();
+        
         }
         static Endpoint ReadEndpointFromFile(ref StreamReader sr)
         {
@@ -110,6 +77,39 @@ namespace quali
                 numbers[i] = Convert.ToInt32(numbersFromLine[i]);
             }
             return numbers;
+        }
+        static void SaveInputToFile(CacheServer[] servers,string sourcePath)
+        {
+            List<int> IDsOfUsedServers = new List<int>();
+            StreamWriter sw = new StreamWriter(string.Format(sourcePath + "_output.txt"));
+            //this loop search for used servers to write a proper value in first line of output file
+            //and adds their IDs so we dont have to loop throug all servers again
+            for (int i = 0; i < servers.Length; i++)
+            {
+                if (servers[i].videosCachedOnServer.Count > 0)
+                    IDsOfUsedServers.Add(i);
+
+            }
+            sw.WriteLine(IDsOfUsedServers.Count);
+            for (int i = 0; i < IDsOfUsedServers.Count; i++)
+            {
+                //0 1 2 3 - this means server#1 got videos#1,2 and 3 on it
+                sw.Write(IDsOfUsedServers[i]+" ");//first we write id of server
+                for (int j = 0; j < servers[IDsOfUsedServers[j]].videosCachedOnServer.Count; j++)//than we loop throug all videos posted on it
+                {
+                    sw.Write(servers[IDsOfUsedServers[j]].videosCachedOnServer[j]+" ");
+                }
+                sw.WriteLine();
+            }
+            sw.Close();
+        }
+
+        static void ProcessAndChooseRequests(ref Video[] videos, ref Endpoint[] endpoints, ref Request[] requests,ref CacheServer[] cachedServers)
+        {
+            for (int i = 0; i < requests.Length; i++)
+            {
+                cachedServers[endpoints[requests[i].EndpointId].cachesAndLatency[0].Item1].AddMovie(videos[requests[i].VidId]);
+            }
         }
     }
 }
