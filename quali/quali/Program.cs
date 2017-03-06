@@ -115,10 +115,15 @@ namespace quali
             long timeSaved;
             int videoID;//tu bedzie trzymany id video z requesta
             int minimalLatency;
+            int idOfBest;
             //dla kazdego requesta trzeba wyszukac najkrotszy czas przesylu
             for (int i = 0; i < requests.Length; i++)
             {
                 videoID = requests[i].VidId;
+                for (int j = 0; j < cachedServers.Length; j++)
+                {
+
+                }
             }
         }
     }
