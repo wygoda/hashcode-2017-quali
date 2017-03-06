@@ -47,7 +47,7 @@ namespace quali
             }
             #endregion
             ProcessAndChooseRequests(ref videos,ref endpoints,ref requests,ref cachedServers);
-            SaveInputToFile(cachedServers, args[0] + "_output.txt");
+            SaveOutputToFile(cachedServers, args[0] + "_output.txt");
             Console.ReadKey();
         
         }
@@ -78,7 +78,7 @@ namespace quali
             }
             return numbers;
         }
-        static void SaveInputToFile(CacheServer[] servers,string sourcePath)
+        static void SaveOutputToFile(CacheServer[] servers,string sourcePath)
         {
             List<int> IDsOfUsedServers = new List<int>();
             StreamWriter sw = new StreamWriter(string.Format(sourcePath + "_output.txt"));
@@ -112,9 +112,13 @@ namespace quali
         }
         static void CalculateSavedTime(ref Video[] videos, ref Endpoint[] endpoints, ref Request[] requests, ref CacheServer[] cachedServers)
         {
+            long timeSaved;
+            int videoID;//tu bedzie trzymany id video z requesta
+            int minimalLatency;
+            //dla kazdego requesta trzeba wyszukac najkrotszy czas przesylu
             for (int i = 0; i < requests.Length; i++)
             {
-
+                videoID = requests[i].VidId;
             }
         }
     }
