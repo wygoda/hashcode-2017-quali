@@ -111,17 +111,17 @@ namespace quali
                 cachedServers[endpoints[requests[i].EndpointId].cachesAndLatency[0].Item1].AddMovie(videos[requests[i].VidId]);
             }
         }
-        static long CalculateSavedTime(ref Video[] videos, ref Endpoint[] endpoints, ref Request[] requests, ref CacheServer[] cachedServers)
+        static decimal CalculateSavedTime(ref Video[] videos, ref Endpoint[] endpoints, ref Request[] requests, ref CacheServer[] cachedServers)
         {
-            long timeSaved=0;
+          ulong timeSaved=0;
             int videoID;//tu bedzie trzymany id video z requesta
             List<int> latencies = new List<int>();
             int minimalLatency = 0;
-            long requestsInTotal = 0;
+            ulong requestsInTotal = 0;
             //dla kazdego requesta trzeba wyszukac najkrotszy czas przesylu
             for (int i = 0; i < requests.Length; i++)
             {
-                requestsInTotal += requests[i].ReqCount;
+                requestsInTotal +=(ulong) requests[i].ReqCount;
                 videoID = requests[i].VidId;
                 for (int j = 0; j < cachedServers.Length; j++)
                 {
@@ -141,7 +141,7 @@ namespace quali
                     if (minimalLatency > latencies[j])
                         minimalLatency = latencies[j];
                 }
-                timeSaved = requests[i].ReqCount * (endpoints[requests[i].EndpointId].LatencyToDatacenter - minimalLatency);
+                timeSaved +=(ulong)( requests[i].ReqCount * (endpoints[requests[i].EndpointId].LatencyToDatacenter - minimalLatency));
             }
       //      Console.WriteLine(timeSaved);
       //     Console.WriteLine(requestsInTotal);
