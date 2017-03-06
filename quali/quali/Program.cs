@@ -82,7 +82,7 @@ namespace quali
         {
             List<int> IDsOfUsedServers = new List<int>();
             StreamWriter sw = new StreamWriter(string.Format(sourcePath + "_output.txt"));
-            //this loop search for used servers to write a proper value in first line of output file
+            //this loop searches for used servers to write a proper value in first line of output file
             //and adds their IDs so we dont have to loop throug all servers again
             for (int i = 0; i < servers.Length; i++)
             {
@@ -93,7 +93,7 @@ namespace quali
             sw.WriteLine(IDsOfUsedServers.Count);
             for (int i = 0; i < IDsOfUsedServers.Count; i++)
             {
-                //0 1 2 3 - this means server#1 got videos#1,2 and 3 on it
+                //0 1 2 3 - this means server#0 got videos#1,2 and 3 on it
                 sw.Write(IDsOfUsedServers[i]+" ");//first we write id of server
                 for (int j = 0; j < servers[IDsOfUsedServers[j]].videosCachedOnServer.Count; j++)//than we loop throug all videos posted on it
                 {
