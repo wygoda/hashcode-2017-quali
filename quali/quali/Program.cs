@@ -47,7 +47,8 @@ namespace quali
             }
             #endregion
             ProcessAndChooseRequests(ref videos,ref endpoints,ref requests,ref cachedServers);
-            SaveOutputToFile(cachedServers, args[0] + "_output.txt");
+          //  SaveOutputToFile(cachedServers, args[0] + "_output.txt");
+            Console.WriteLine(CalculateSavedTime(ref videos,ref endpoints,ref requests,ref cachedServers));
             Console.ReadKey();
         
         }
@@ -110,21 +111,42 @@ namespace quali
                 cachedServers[endpoints[requests[i].EndpointId].cachesAndLatency[0].Item1].AddMovie(videos[requests[i].VidId]);
             }
         }
-        static void CalculateSavedTime(ref Video[] videos, ref Endpoint[] endpoints, ref Request[] requests, ref CacheServer[] cachedServers)
+        static long CalculateSavedTime(ref Video[] videos, ref Endpoint[] endpoints, ref Request[] requests, ref CacheServer[] cachedServers)
         {
-            long timeSaved;
+            long timeSaved=0;
             int videoID;//tu bedzie trzymany id video z requesta
-            int minimalLatency;
-            int idOfBest;
+            List<int> latencies = new List<int>();
+            int minimalLatency = 0;
+            long requestsInTotal = 0;
             //dla kazdego requesta trzeba wyszukac najkrotszy czas przesylu
             for (int i = 0; i < requests.Length; i++)
             {
+                requestsInTotal += requests[i].ReqCount;
                 videoID = requests[i].VidId;
                 for (int j = 0; j < cachedServers.Length; j++)
                 {
-
+                    if (cachedServers[j].videosCachedOnServer.Contains(videoID))
+                    {
+                        foreach (var cache in endpoints[requests[i].EndpointId].cachesAndLatency)
+                        {
+                            if (cache.Item1 == j)
+                                latencies.Add(cache.Item2);
+                        }
+                    }
                 }
+                latencies.Add(endpoints[requests[i].EndpointId].LatencyToDatacenter);
+                minimalLatency = endpoints[requests[i].EndpointId].LatencyToDatacenter;
+                for (int j = 0; j < latencies.Count; j++)
+                {
+                    if (minimalLatency > latencies[j])
+                        minimalLatency = latencies[j];
+                }
+                timeSaved = requests[i].ReqCount * (endpoints[requests[i].EndpointId].LatencyToDatacenter - minimalLatency);
             }
+      //      Console.WriteLine(timeSaved);
+      //     Console.WriteLine(requestsInTotal);
+            timeSaved = timeSaved* 1000/requestsInTotal; 
+            return timeSaved;
         }
     }
 }
